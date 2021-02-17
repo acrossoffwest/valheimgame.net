@@ -1,0 +1,30 @@
+version: "2.0"
+
+services:
+  valheimserver:
+    restart: "${RESTART_TYPE}"
+    image: lloesche/valheim-server:latest
+    volumes:
+      - ./config/:/config
+    ports:
+      - 2456-2458:2456-2458/udp
+    environment:
+      SERVER_NAME: "${SERVER_NAME}"
+      WORLD_NAME: "${WORLD_NAME}"
+      SERVER_PASS: "${SERVER_PASS}"
+
+  website:
+    restart: "${RESTART_TYPE}"
+    image: nginx:1.7.12
+    volumes:
+      - ../website/:/var/www/html/
+      - ./nginx.d/:/etc/nginx/conf.d
+    environment:
+      VIRTUAL_HOST: "${DOMAINS}"
+    networks:
+      - nginx-proxy-network
+
+networks:
+  nginx-proxy-network:
+    external:
+      name: reverseproxy_default
