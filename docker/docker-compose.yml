@@ -15,7 +15,7 @@ services:
 
   website:
     restart: "${RESTART_TYPE}"
-    image: nginx:1.7.12
+    image: nginx:stable
     volumes:
       - ../website/:/var/www/html/
       - ./nginx.d/:/etc/nginx/conf.d
