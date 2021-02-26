@@ -283,7 +283,7 @@
         }
       }
       const getPlayersCount = () => {
-        fetch('http://source-query.small-proxy.aow.space/api/source/query/78.46.223.177/2457').then(response => {
+        fetch('//source-query.small-proxy.aow.space/api/source/query/78.46.223.177/2457').then(response => {
           response.json().then((json => {
             const playersLength = json.length
             document.querySelector('#players-on-server').innerHTML = playersLength
